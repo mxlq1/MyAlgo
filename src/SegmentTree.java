@@ -43,4 +43,20 @@ public class SegmentTree {
         return getSum(v*2, tl, tm, l, Math.min(r, tm)) + getSum(v*2+1, tm+1, tr, Math.max(l, tm+1), r);
     }
 
+    static void update(int v, int tl, int tr, int pos, int val){
+        if (tl == tr){
+            t[v] = val;
+        }
+        else{
+            int tm = (tl + tr) / 2;
+            if (pos <= tm){
+                update(v*2, tl, tm, pos, val);
+            }
+            else{
+                update(v*2+1, tm+1, tr, pos, val);
+            }
+            t[v] = t[v*2] + t[v*2+1];
+        }
+    }
+
 }
