@@ -4,7 +4,7 @@ public class prefix {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String first = in.nextLine();
+        /*String first = in.nextLine();
         String second = in.nextLine();
         String s = second + "#" + first;
         int[] mas = prefixFunc(s);
@@ -14,6 +14,11 @@ public class prefix {
             if (mas[i] == second.length()){
                 System.out.print(i-(2 * second.length()) + " ");
             }
+        }*/
+        int[] p = z_function("abcda");
+
+        for (int i = 0; i < p.length; i++){
+            System.out.print(p[i] + " ");
         }
     }
 
@@ -34,5 +39,21 @@ public class prefix {
 
         return pi;
      }
+
+    static int[] z_function (String s) {
+        int n = s.length();
+        int[] z = new int[n];
+        for (int i=1, l=0, r=0; i<n; ++i) {
+            if (i <= r)
+                z[i] = Math.min(r-i+1, z[i-l]);
+            while (i+z[i] < n && s.charAt(z[i]) == s.charAt(i+z[i]))
+                ++z[i];
+            if (i+z[i]-1 > r){
+                l = i;
+                r = i+z[i]-1;
+            }
+        }
+        return z;
+    }
 
 }
